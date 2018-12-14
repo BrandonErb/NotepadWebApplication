@@ -1,2 +1,2 @@
 # NotepadWebApplication
-Javascript Notepad Web App. React frontend and Node Express backend.
+Javascript Notepad Web App. React frontend and Node Express backend. Work in progress.
