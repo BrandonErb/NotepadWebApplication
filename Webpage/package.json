@@ -1,28 +1,34 @@
 {
-  "name": "NotepadApp",
-  "version": "0.1.1",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "start": "webpack-dev-server --content-base --inline --hot",
-    "server": "./node_modules/.bin/webpack-dev-server --content-base --inline --hot",
-    "build": "webpack -p"
-  },
-  "dependencies": {
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.7",
-    "jquery": "^3.1.0",
-    "react": "^15.3.2",
-    "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.3.2",
-    "react-redux": "^4.4.5",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.7.4",
-    "redux-promise-middleware": "4.2.1",
-    "redux-thunk": "^2.1.0",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.16.2"
-  },
+  "name": "notepad-app",
   "author": "Brandon Erb",
-  "license": ""
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.12.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.8",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ]
+  },
+  "devDependencies": {}
 }
