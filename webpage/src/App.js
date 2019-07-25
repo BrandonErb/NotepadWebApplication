@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import NavTabs from './NavTabs'
 import Table from './Table'
 import Form from './Form'
+import TextBox from './Text'
+import Controls from './Controls'
 import './index.css'
 
 class App extends Component {
@@ -9,9 +11,9 @@ class App extends Component {
     characters: [],
     notes: {
       title: 'new note',
-      content: '',
+      content: 'start of note',
     },
-    activeTab : 1
+    activeTab : 1,
   }
 
   removeCharacter = index => {
@@ -33,6 +35,8 @@ class App extends Component {
     return (
       <div className="container">
         <NavTabs/>
+        <TextBox/>
+        <Controls/>
         <Table characterData={characters} removeCharacter={this.removeCharacter} />
         <Form handleSubmit={this.handleSubmit}/>
       </div>

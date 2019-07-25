@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+textarea, label {
+  border-color: #ced4da!important;
+  outline:0px !important;
+  -webkit-box-shadow: none !important;
+}
