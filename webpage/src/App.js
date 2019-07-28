@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
-import NavTabs from './NavTabs'
 import Table from './Table'
 import Form from './Form'
-import TextBox from './Text'
 import Controls from './Controls'
 import './index.css'
 
 class App extends Component {
   state = {
     characters: [],
-    notes: {
-      title: 'new note',
-      content: 'start of note',
-    },
+    notes: 'start notes',
     activeTab : 1,
   }
 
@@ -27,16 +22,30 @@ class App extends Component {
   }
 
   handleSubmit = character => {
-  this.setState({ characters: [...this.state.characters, character] })
+    this.setState({ characters: [...this.state.characters, character] })
+  }
+
+  saveNote = () => {
+
+  }
+
+  removeNote = () => {
+    this.setState({notes: ''})
+  }
+
+  loadNotes = () => {
+
+  }
+
+  loadNote = () => {
+    this.setState({notes: 'Loaded Text'})
   }
 
   render() {
     const { characters } = this.state;
     return (
       <div className="container">
-        <NavTabs/>
-        <TextBox/>
-        <Controls/>
+        <Controls startNotes={this.state.notes} changeNote={this.loadNote} removeNote={this.removeNote}/>
         <Table characterData={characters} removeCharacter={this.removeCharacter} />
         <Form handleSubmit={this.handleSubmit}/>
       </div>

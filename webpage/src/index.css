@@ -17,3 +17,7 @@ textarea, label {
   outline:0px !important;
   -webkit-box-shadow: none !important;
 }
+
+button {
+  margin-left: 25px;
+}
