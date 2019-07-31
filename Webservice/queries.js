@@ -14,9 +14,15 @@ var options = {
 
 var pgp = require('pg-promise')(options);
 
-var cn = 'postgres://tifhfzgnordfuw:63cc4edebccfa8e3d7b17c858c47cd43a6447ed426370b7b750366fb16c1e4cd@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d6kc78ehqi9r46?ssl=true';
+var cn = {
+  host: 'localhost',
+  port: 5433,
+  database: 'Notepad',
+  user: 'admin',
+  password: 'magic'
+}
 
-var db = pgp(cn);
+const db = pgp(cn);
 
 db.connect()
     .then(obj => {
@@ -46,7 +52,7 @@ function getNotes(req, res, next) {
   // console.log(offset);
   // console.log(req.query.order);
   if(req.query.order == 'asc'){
-  db.any('SELECT * FROM "Notepad"."Note" ORDER BY "NoteId" ASC LIMIT $1 OFFSET $2', [limit, offset])
+  db.any('SELECT * FROM "Notepad"."Notes" ORDER BY "noteId" ASC LIMIT $1 OFFSET $2', [limit, offset])
     .then(function (data) {
       res.status(200)
         .json({
@@ -60,7 +66,7 @@ function getNotes(req, res, next) {
     });
   }
   else{
-    db.any('SELECT * FROM "Notepad"."Note" ORDER BY "NoteId" DESC LIMIT $1 OFFSET $2', [limit, offset])
+    db.any('SELECT * FROM "Notepad"."Notes" ORDER BY "noteId" DESC LIMIT $1 OFFSET $2', [limit, offset])
       .then(function (data) {
         res.status(200)
           .json({
@@ -76,7 +82,7 @@ function getNotes(req, res, next) {
  }
 
 function getNote(req, res, next) {
-  db.one('SELECT "NoteId", "Text" FROM "Notepad"."Note" WHERE "NoteId" = $1', [req.params.id])
+  db.one('SELECT "noteId", "Text" FROM "Notepad"."Notes" WHERE "noteId" = $1', [req.params.id])
     .then(function (data) {
       res.status(200)
         .json({
@@ -91,7 +97,7 @@ function getNote(req, res, next) {
 }
 
 function addNote(req, res, next) {
-    db.none('INSERT INTO "Notepad"."Note" ("NoteId" , "Text") VALUES ( $1 , $2 )', [req.body.id , req.body.text])
+    db.none('INSERT INTO "Notepad"."Notes" ("noteId" , "text") VALUES ( $1 , $2 )', [req.body.id , req.body.text])
     .then(function () {
       res.status(200)
         .json({
@@ -105,7 +111,7 @@ function addNote(req, res, next) {
 }
 
 function updateNote(req, res, next) {
-  db.none('UPDATE "Notepad"."Note" SET "Text" = $1 WHERE "NoteId" = $2' , [req.body.text, req.params.id] )
+  db.none('UPDATE "Notepad"."Notes" SET "text" = $1 WHERE "noteId" = $2' , [req.body.text, req.params.id] )
     .then(function () {
       res.status(200)
         .json({
@@ -119,7 +125,7 @@ function updateNote(req, res, next) {
 }
 
 function deleteNote(req, res, next) {
-  db.result('DELETE FROM "Notepad"."Note" WHERE "NoteId" = $1', req.params.id)
+  db.result('DELETE FROM "Notepad"."Notes" WHERE "noteId" = $1', req.params.id)
     .then(function (result) {
       res.status(200)
         .json({
