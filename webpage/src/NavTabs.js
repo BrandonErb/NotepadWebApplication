@@ -9,8 +9,9 @@ class NavTabs extends Component {
      // Takes active tab from props if it is defined there
     this.state = {
       activeTab: props.tabKey,
-      notes: props.tabLabels
+      notes: props.tabLabels,
     };
+
     // Bind the handleSelect function already here (not in the render function)
    this.handleSelect = this.handleSelect.bind(this);
   }
@@ -20,7 +21,6 @@ class NavTabs extends Component {
     // the Tabs component knows about the change and re-renders.
     this.setState({
       activeTab: selectedTab
-
     });
 
     this.props.changeKey(selectedTab);
@@ -39,19 +39,21 @@ class NavTabs extends Component {
 
   render(){
     return (
-      <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect} id="nav-tabs" >
-        <Tab eventKey={1} title={this.state.notes[1-1].title}>
-          {this.state.notes[1-1].title}
-        </Tab>
-        <Tab eventKey={2} title={this.state.notes[2-1].title}>
-          {this.state.notes[2-1].title}
-        </Tab>
-        <Tab eventKey={3} title={this.state.notes[3-1].title}>
-          {this.state.notes[3-1].title}
-        </Tab>
+      <Tabs activeKey={this.state.activeTab} onSelect={k => this.handleSelect(k)} id="nav-tabs" >
+      {
+        this.state.notes.map((note, index) => { // arrow function
+          return (
+            <Tab eventKey={index + 1} title={this.state.notes[index].title}>
+            {this.state.notes[index].title}
+            </Tab>
+          );
+        })
+      }
       </Tabs>
     );
   }
 }
+
+
 
 export default NavTabs
