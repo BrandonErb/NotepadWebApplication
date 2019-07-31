@@ -9,20 +9,21 @@ class Controls extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      notes: this.props.startNotes
+  this.state = {
+    notes: this.props.startNotes,
+    activeTab: 1
     }
     this.NewText = React.createRef();
   }
 
   handleLoad = () => {
-    this.setState({notes: 'Load State Change'})
-    this.props.changeNote()
+    let newState = Object.assign({}, this.state)
+    newState.notes[0] = {title: 'Loaded', content: 'loaded Content'}
+    this.setState(newState)
   }
 
   handleLoadAll = () => {
-    const newText = this.NewText.current
-    this.setState({newNotes: newText.state.currentNotes})
+
   }
 
   handleSave = () => {
@@ -30,31 +31,46 @@ class Controls extends Component {
   }
 
   handleDelete = () => {
-    this.setState({notes: 'deleted'})
-    this.props.removeNote()
+
   }
 
   changeActiveTab = key => {
     this.setState({activeTab: key})
   }
 
+  changeText = newText => {
+    let newState = Object.assign({}, this.state)
+    newState.notes[this.state.activeTab-1] = {content: newText, title: this.state.notes[this.state.activeTab-1].title}
+    this.setState(newState)
+  }
+
   handleChange = (event) => {
-    this.setState({title: event.target.value})
+    let newState = Object.assign({}, this.state)
+    newState.notes[this.state.activeTab-1] = {title: event.target.value, content: this.state.notes[this.state.activeTab-1].content}
+    this.setState(newState)
   }
 
   render(){
+    const titleValue = this.state.notes[this.state.activeTab-1].title;
     return (
       <div>
         <div>
           <NavTabs tabKey={this.state.activeTab} tabLabels={this.state.notes} changeKey={this.changeActiveTab}/>
-          <TextBox startNotes={this.state.notes} ref={this.NewText}/>
+          <TextBox startNotes={this.state.notes[this.state.activeTab-1].content} changeText={this.changeText}/>
           <InputGroup className="title-box">
             <InputGroup.Prepend>
               <InputGroup.Text id="title-text">Title</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
-              placeholder="Type title here"
-              onChange={this.handleChange.bind(this)}
+              defaultValue={this.state.notes[this.state.activeTab-1].title}
+              onBlur={this.handleChange.bind(this)}
+              onKeyPress={event => {
+              if (event.key === "Enter") {
+                this.handleChange(event);
+              }
+              }}
+              name="titleValue"
+              key={`titleValue:${titleValue}`}
             />
           </InputGroup>
         </div>

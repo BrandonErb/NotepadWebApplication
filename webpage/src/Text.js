@@ -26,7 +26,7 @@ class TextBox extends Component {
 
   handleChange = (event) => {
     this.setState({currentNotes: event.target.value})
-    this.NewText = this.state
+    this.props.changeText(event.target.value)
   }
 
   render(){
@@ -40,7 +40,7 @@ class TextBox extends Component {
             as="textarea"
             rows="17"
             defaultValue={textValue}
-            onChange={this.handleChange.bind(this)}
+            onBlur={this.handleChange.bind(this)}
             name="textValue"
             key={`textValue:${textValue}`}/>
         </FormGroup>

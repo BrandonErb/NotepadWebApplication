@@ -7,7 +7,16 @@ import './index.css'
 class App extends Component {
   state = {
     characters: [],
-    notes: 'start notes',
+    notes: [{
+      title: 'Test Note 1',
+      content: 'this is test note one content'
+    },{
+      title: 'Test Note 2',
+      content: 'this is test note two content'
+    },{
+      title: 'Test Note 3',
+      content: 'this is test note three content'
+    }],
     activeTab : 1,
   }
 
@@ -29,8 +38,8 @@ class App extends Component {
 
   }
 
-  removeNote = () => {
-    this.setState({notes: ''})
+  removeNote = (note) => {
+    this.setState({notes: note })
   }
 
   loadNotes = () => {
@@ -38,14 +47,22 @@ class App extends Component {
   }
 
   loadNote = () => {
-    this.setState({notes: 'Loaded Text'})
+
+  }
+
+  //Updates state on top parent
+  //Called before REST calls to ensure matching state
+  changeNote = (note, tab) => {
+    let newState = Object.assign({}, this.state)
+    newState.notes[tab-1] = {note}
+    this.setState(newState)
   }
 
   render() {
     const { characters } = this.state;
     return (
       <div className="container">
-        <Controls startNotes={this.state.notes} changeNote={this.loadNote} removeNote={this.removeNote}/>
+        <Controls startNotes={this.state.notes} changeNote={this.changeNote} deleteNote={this.removeNote} saveNote={this.saveNote} loadNote={this.loadNote} loadNotes={this.loadNotes}/>
         <Table characterData={characters} removeCharacter={this.removeCharacter} />
         <Form handleSubmit={this.handleSubmit}/>
       </div>
