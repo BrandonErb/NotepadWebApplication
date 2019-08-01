@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Form, FormGroup, FormControl} from 'react-bootstrap'
 import './index.css'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 class TextBox extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class TextBox extends Component {
     return (
       <div>
       <Form>
-        <FormGroup controlId="content=text">
+        <FormGroup controlId="content-text">
           <FormControl
             as="textarea"
             rows="17"

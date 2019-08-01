@@ -50,6 +50,13 @@ class Controls extends Component {
     this.setState(newState)
   }
 
+  handleNew = () => {
+    // let newState = Object.assign({}, this.state)
+    // newState.notes.push{title:'', content: ''}
+    // this.setState(newState)
+    this.setState({ notes:[...this.state.notes, {title:' ', content: ' '}] })
+  }
+
   render(){
     const titleValue = this.state.notes[this.state.activeTab-1].title;
     return (
@@ -76,10 +83,11 @@ class Controls extends Component {
         </div>
         <div>
           <ButtonToolbar>
-           <Button variant="secondary" onClick={this.handleLoad}>Load</Button>
-           <Button variant="secondary" onClick={this.handleLoadAll.bind(this)} className="button">Load All</Button>
-           <Button variant="secondary" >Save</Button>
-           <Button variant="secondary" onClick={this.handleDelete}>Delete</Button>
+            <Button variant="secondary" onClick={this.handleNew.bind(this)} className="button">New</Button>
+            <Button variant="secondary" onClick={this.handleLoad.bind(this)} className="button">Load</Button>
+            {/**<Button variant="secondary" onClick={this.handleLoadAll.bind(this)} className="button">Load All</Button>**/}
+            <Button variant="secondary" onClick={this.handleSave.bind(this)} className="button">Save</Button>
+            <Button variant="secondary" onClick={this.handleDelete.bind(this)} className="button">Delete</Button>
           </ButtonToolbar>
         </div>
       </div>

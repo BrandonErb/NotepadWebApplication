@@ -3,6 +3,7 @@ import Table from './Table'
 import Form from './Form'
 import Controls from './Controls'
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
   state = {

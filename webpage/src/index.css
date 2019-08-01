@@ -18,6 +18,16 @@ textarea, label {
   -webkit-box-shadow: none !important;
 }
 
-button {
-  margin-left: 25px;
+.button {
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.nav-tabs {
+  border: #efefef;
+}
+
+.nav-link {
+  background-color: #e9ecef;
+  color: #000000;
 }

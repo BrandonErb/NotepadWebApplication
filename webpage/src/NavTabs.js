@@ -26,25 +26,25 @@ class NavTabs extends Component {
     this.props.changeKey(selectedTab);
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState){
-  //   if (nextProps.tabLabels !== prevState.tabLabels) {
-  //     return {
-  //       labels: nextProps.tabLabels,
-  //     };
-  //   }
-  //   // Return null if the state hasn't changed
-  //   return null;
-  // }
+  static getDerivedStateFromProps(nextProps, prevState){
+    if (nextProps.tabLabels !== prevState.tabLabels) {
+      return {
+        notes: nextProps.tabLabels,
+      };
+    }
+    // Return null if the state hasn't changed
+    return null;
+  }
 
 
   render(){
     return (
-      <Tabs activeKey={this.state.activeTab} onSelect={k => this.handleSelect(k)} id="nav-tabs" >
+      <Tabs activeKey={this.state.activeTab} onSelect={k => this.handleSelect(k)}>
       {
         this.state.notes.map((note, index) => { // arrow function
           return (
-            <Tab eventKey={index + 1} title={this.state.notes[index].title}>
-            {this.state.notes[index].title}
+            <Tab eventKey={index + 1} title={this.state.notes[index].title} className="nav-tabs">
+            {/**this.state.notes[index].title**/}
             </Tab>
           );
         })
