@@ -47,12 +47,8 @@ module.exports = {
 function getNotes(req, res, next) {
   var limit = parseInt(req.query.limit);
   var offset = parseInt(req.query.start);
-  // console.log(req.params.note);
-  // console.log(limit);
-  // console.log(offset);
-  // console.log(req.query.order);
-  if(req.query.order == 'asc'){
-  db.any('SELECT * FROM "Notepad"."Notes" ORDER BY "noteId" ASC LIMIT $1 OFFSET $2', [limit, offset])
+  //if(req.query.order == 'asc'){
+  db.any('SELECT * FROM notes ORDER BY "note_id" ASC')
     .then(function (data) {
       res.status(200)
         .json({
@@ -60,29 +56,29 @@ function getNotes(req, res, next) {
           data: data,
           message: 'Retrieved a note'
         });
-    })
+      })
     .catch(function (err) {
       return next(err);
     });
-  }
-  else{
-    db.any('SELECT * FROM "Notepad"."Notes" ORDER BY "noteId" DESC LIMIT $1 OFFSET $2', [limit, offset])
-      .then(function (data) {
-        res.status(200)
-          .json({
-            status: 'success',
-            data: data,
-            message: 'Retrieved a note'
-          });
-      })
-      .catch(function (err) {
-        return next(err);
-      });
-  }
+  // }
+  // else{
+  //   db.any('SELECT * FROM "Notepad"."Notes" ORDER BY "noteId" DESC LIMIT $1 OFFSET $2', [limit, offset])
+  //     .then(function (data) {
+  //       res.status(200)
+  //         .json({
+  //           status: 'success',
+  //           data: data,
+  //           message: 'Retrieved a note'
+  //         });
+  //     })
+  //     .catch(function (err) {
+  //       return next(err);
+  //     });
+  // }
  }
 
 function getNote(req, res, next) {
-  db.one('SELECT "noteId", "Text" FROM "Notepad"."Notes" WHERE "noteId" = $1', [req.params.id])
+  db.one('SELECT note_id, note_text FROM notes WHERE "note_id" = $1', [req.params.id])
     .then(function (data) {
       res.status(200)
         .json({
@@ -97,7 +93,7 @@ function getNote(req, res, next) {
 }
 
 function addNote(req, res, next) {
-    db.none('INSERT INTO "Notepad"."Notes" ("noteId" , "text") VALUES ( $1 , $2 )', [req.body.id , req.body.text])
+    db.none('INSERT INTO notes (note_id , note_text) VALUES ( $1 , $2 )', [req.query.id , req.query.text])
     .then(function () {
       res.status(200)
         .json({
@@ -111,7 +107,7 @@ function addNote(req, res, next) {
 }
 
 function updateNote(req, res, next) {
-  db.none('UPDATE "Notepad"."Notes" SET "text" = $1 WHERE "noteId" = $2' , [req.body.text, req.params.id] )
+  db.none('UPDATE notes SET note_text = $1 WHERE note_id = $2' , [req.query.text, req.params.id] )
     .then(function () {
       res.status(200)
         .json({
@@ -125,7 +121,7 @@ function updateNote(req, res, next) {
 }
 
 function deleteNote(req, res, next) {
-  db.result('DELETE FROM "Notepad"."Notes" WHERE "noteId" = $1', req.params.id)
+  db.result('DELETE FROM notes WHERE note_id = $1', req.params.id)
     .then(function (result) {
       res.status(200)
         .json({
