@@ -1,17 +1,17 @@
 # NotepadWebApplication
 Javascript RESTful Notepad Web App. React frontend and Node Express using PostgreSQL. Uses Axios.js and Bootstrap.js.
 
-##New
+## New
 Creates a new empty note.
 
-##Load All
+## Load All
 Loads everything in the database.
 
-##Load
+## Load
 Loads induvidual notes from database.
 
-##Save
+## Save
 Saves note to database either posting or updating.
 
-##Delete
+## Delete
 Deletes entry from database.
