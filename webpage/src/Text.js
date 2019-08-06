@@ -9,8 +9,6 @@ class TextBox extends Component {
     this.state = {
       notes: this.props.startNotes
     };
-
-    // this.handleChange = this.handleChange.bind();
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
@@ -37,7 +35,7 @@ class TextBox extends Component {
         <FormGroup controlId="content-text">
           <FormControl
             as="textarea"
-            rows="17"
+            rows="20"
             defaultValue={textValue}
             onBlur={this.handleChange.bind(this)}
             name="textValue"

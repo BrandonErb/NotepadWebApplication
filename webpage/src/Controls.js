@@ -36,7 +36,7 @@ class Controls extends Component {
   handleDelete = async () => {
     await this.props.deleteNote(this.state, this.state.notes[this.state.activeTab-1].title, this.state.activeTab)
     let newState = Object.assign({}, this.state)
-    newState = {notes: this.props.startNotes, newNotes: this.props.startNotes, activeTab: this.props.currentTab}
+    newState = {notes: this.props.startNotes, newNotes: this.props.startNotes, activeTab: 1}
     this.setState(newState)
   }
 
@@ -75,6 +75,7 @@ class Controls extends Component {
               <InputGroup.Text id="title-text">Title</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
+              className="title-text-box"
               defaultValue={this.state.notes[this.state.activeTab-1].title}
               onBlur={this.handleChange.bind(this)}
               onKeyPress={event => {

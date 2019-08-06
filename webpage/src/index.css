@@ -18,6 +18,12 @@ textarea, label {
   -webkit-box-shadow: none !important;
 }
 
+.title-text-box{
+  border-color: #ced4da!important;
+  outline:0px !important;
+  -webkit-box-shadow: none !important;
+}
+
 .button {
   margin-right: 5px;
   margin-top: 2px;

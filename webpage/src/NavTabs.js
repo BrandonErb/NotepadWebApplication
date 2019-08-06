@@ -33,12 +33,6 @@ class NavTabs extends Component {
         activeTab: nextProps.tabKey,
       };
     }
-    // if (nextProps.tabLabels !== prevState.notes) {
-    //   return {
-    //     notes: nextProps.tabLabels,
-    //   };
-    // }
-    // Return null if the state hasn't changed
     return null;
   }
 
@@ -50,7 +44,6 @@ class NavTabs extends Component {
         this.state.notes.map((note, index) => { // arrow function
           return (
             <Tab eventKey={index + 1} title={this.state.notes[index].title} className="navigation-tabs">
-            {/**this.state.notes[index].title**/}
             </Tab>
           );
         })

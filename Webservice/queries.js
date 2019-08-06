@@ -60,21 +60,6 @@ function getNotes(req, res, next) {
     .catch(function (err) {
       return next(err);
     });
-  // }
-  // else{
-  //   db.any('SELECT * FROM "Notepad"."Notes" ORDER BY "noteId" DESC LIMIT $1 OFFSET $2', [limit, offset])
-  //     .then(function (data) {
-  //       res.status(200)
-  //         .json({
-  //           status: 'success',
-  //           data: data,
-  //           message: 'Retrieved a note'
-  //         });
-  //     })
-  //     .catch(function (err) {
-  //       return next(err);
-  //     });
-  // }
  }
 
 function getNote(req, res, next) {
