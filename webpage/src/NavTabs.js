@@ -8,8 +8,8 @@ class NavTabs extends Component {
     super(props);
      // Takes active tab from props if it is defined there
     this.state = {
-      activeTab: props.tabKey,
-      notes: props.tabLabels,
+      activeTab: this.props.tabKey,
+      notes: this.props.tabLabels,
     };
 
     // Bind the handleSelect function already here (not in the render function)
@@ -27,11 +27,17 @@ class NavTabs extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
-    if (nextProps.tabLabels !== prevState.tabLabels) {
+    if (nextProps.tabKey !== prevState.activeTab || nextProps.tabLabels !== prevState.notes) {
       return {
         notes: nextProps.tabLabels,
+        activeTab: nextProps.tabKey,
       };
     }
+    // if (nextProps.tabLabels !== prevState.notes) {
+    //   return {
+    //     notes: nextProps.tabLabels,
+    //   };
+    // }
     // Return null if the state hasn't changed
     return null;
   }
@@ -43,7 +49,7 @@ class NavTabs extends Component {
       {
         this.state.notes.map((note, index) => { // arrow function
           return (
-            <Tab eventKey={index + 1} title={this.state.notes[index].title} className="nav-tabs">
+            <Tab eventKey={index + 1} title={this.state.notes[index].title} className="navigation-tabs">
             {/**this.state.notes[index].title**/}
             </Tab>
           );

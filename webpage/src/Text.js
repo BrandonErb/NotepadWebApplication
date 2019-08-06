@@ -14,7 +14,7 @@ class TextBox extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
-    if (nextProps.startNotes !== prevState.startNotes) {
+    if (nextProps.startNotes !== prevState.notes) {
       return {
         notes: nextProps.startNotes,
       };

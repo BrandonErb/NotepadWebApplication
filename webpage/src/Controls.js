@@ -9,29 +9,35 @@ class Controls extends Component {
   constructor(props) {
     super(props);
 
-  this.state = {
-    notes: this.props.startNotes,
-    activeTab: 1
-    }
-    this.NewText = React.createRef();
+    this.state = {
+      notes: this.props.startNotes,
+      activeTab: this.props.currentTab
+      }
   }
 
-  handleLoad = () => {
+  handleLoad = async () => {
+    await this.props.loadNote(this.state, this.state.notes[this.state.activeTab-1].title, this.state.activeTab)
+  }
+
+  handleLoadAll = async () => {
+    await this.props.loadNotes(this.state)
+
+    this.setState({newNotes: this.props.startNotes})
     let newState = Object.assign({}, this.state)
-    newState.notes[0] = {title: 'Loaded', content: 'loaded Content'}
+    newState = {notes: this.state.newNotes, activeTab: this.props.currentTab}
     this.setState(newState)
   }
 
-  handleLoadAll = () => {
-
+  handleSave = async () => {
+    await this.props.saveNote(this.state, this.state.notes[this.state.activeTab-1])
+    this.setState({newNotes: this.props.startNotes})
   }
 
-  handleSave = () => {
-
-  }
-
-  handleDelete = () => {
-
+  handleDelete = async () => {
+    await this.props.deleteNote(this.state, this.state.notes[this.state.activeTab-1].title, this.state.activeTab)
+    let newState = Object.assign({}, this.state)
+    newState = {notes: this.props.startNotes, newNotes: this.props.startNotes, activeTab: this.props.currentTab}
+    this.setState(newState)
   }
 
   changeActiveTab = key => {
@@ -51,14 +57,14 @@ class Controls extends Component {
   }
 
   handleNew = () => {
-    // let newState = Object.assign({}, this.state)
-    // newState.notes.push{title:'', content: ''}
-    // this.setState(newState)
-    this.setState({ notes:[...this.state.notes, {title:' ', content: ' '}] })
+    this.setState({ notes:[...this.state.notes, {title:'New Note', content: ''}] })
+    this.setState({ activeTab: this.state.notes.length + 1})
   }
 
   render(){
-    const titleValue = this.state.notes[this.state.activeTab-1].title;
+
+    const titleValue = this.state.notes[this.state.activeTab-1].title
+
     return (
       <div>
         <div>
@@ -85,7 +91,7 @@ class Controls extends Component {
           <ButtonToolbar>
             <Button variant="secondary" onClick={this.handleNew.bind(this)} className="button">New</Button>
             <Button variant="secondary" onClick={this.handleLoad.bind(this)} className="button">Load</Button>
-            {/**<Button variant="secondary" onClick={this.handleLoadAll.bind(this)} className="button">Load All</Button>**/}
+            <Button variant="secondary" onClick={this.handleLoadAll.bind(this)} className="button">Load All</Button>
             <Button variant="secondary" onClick={this.handleSave.bind(this)} className="button">Save</Button>
             <Button variant="secondary" onClick={this.handleDelete.bind(this)} className="button">Delete</Button>
           </ButtonToolbar>

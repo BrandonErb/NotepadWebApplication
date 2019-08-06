@@ -23,8 +23,8 @@ textarea, label {
   margin-top: 2px;
 }
 
-.nav-tabs {
-  border: #efefef;
+.nav-tabs .nav-link {
+  border: 1px solid #00000030 !important;
 }
 
 .nav-link {
