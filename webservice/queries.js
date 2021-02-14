@@ -15,7 +15,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 var cn = {
-  host: 'localhost',
+  host: 'notepad-web-app.ctn5cicwljcn.us-east-1.rds.amazonaws.com',
   port: 5433,
   database: 'Notepad',
   user: 'admin',
