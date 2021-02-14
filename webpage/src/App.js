@@ -118,6 +118,8 @@ class App extends Component {
 
 }
 
-const url = 'http://localhost:8000/notes/'
+//URL for webservice
+//const url = 'http://localhost:8000/notes/'
+const url = 'http://ec2-34-238-122-74.compute-1.amazonaws.com:8000/notes/'
 
 export default App
